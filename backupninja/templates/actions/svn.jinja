@@ -1,0 +1,25 @@
+##
+## Perform a hot backup of subversion repositories.
+##
+## REQUIRES: apt-get install subversion-tools
+##
+## This file can be empty, the defaults are usually good.
+##
+
+when = {{ when|default('') }}
+
+## where subversion data lives
+src = {{ src|default('/var/lib/svn') }}
+
+## where to save the backups to
+dest = {{ dest|default('/var/backups/svn') }}
+
+## where to save temporary backups
+## (if successful, $tmp is moved to $dest)
+tmp = {{ tmp|default('/var/backups/svn.tmp') }}
+
+## the hotbackup program to use.
+HOTBACKUP = {{ hotbackup|default('/usr/lib/subversion/hot-backup.py') }}
+
+## the name of the vserver containing svn, if using vservers
+vsname = {{ vsname|default('') }}

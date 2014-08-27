@@ -1,0 +1,109 @@
+when = {{ when|default('') }}
+
+# passed directly to duplicity
+options = {{ options|default('--verbosity 8 ')}}
+
+# default is 0, but set to 19 if you want to lower the priority.
+nicelevel = {{ nicelevel|default(0)}}
+
+# default is yes. set to no to skip the test if the remote host is alive
+testconnect = {{ 'no' if not testconnect|default(False) else 'yes' }}
+
+######################################################
+## gpg section
+## (how to encrypt and optionnally sign the backups)
+
+[gpg]
+
+# passphrase needed to unlock the GnuPG key
+# NB: do not quote it, and it should not contain any quote
+password = {{ password|default('') }}
+
+# default is no, for backward compatibility with backupninja <= 0.5.
+# when set to yes, encryptkey option must be set below.
+sign = {{ 'yes' if sign|default(True) else 'no' }}
+
+# key ID used for data encryption and, optionnally, signing.
+# if not set, local root's default gpg key is used.
+encryptkey = {{ encryptkey|default('') }}
+
+######################################################
+## source section
+## (where the files to be backed up are coming from)
+
+[source]
+
+# files to include in the backup
+# (supports globbing with '*')
+# BIG FAT WARNING
+# Symlinks are not dereferenced. Moreover, an include line whose path
+# contains, at any level, a symlink to a directory, will only have the
+# symlink backed-up, not the target directory's content. Yes, you have
+# to dereference yourself the symlinks, or to use 'mount --bind'
+# instead.
+
+# EXAMPLE
+# Let's say /home is a symlink to /mnt/crypt/home ; the following line
+# will only backup a "/home" symlink ; neither /home/user nor
+# /home/user/Mail will be backed-up :
+#   include = /home/user/Mail
+# A workaround is to 'mount --bind /mnt/crypt/home /home' ; another
+# one is to write :
+#   include = /mnt/crypt/home/user/Mail
+
+{%- for inc in include|default([]) %}
+include = {{ inc }}
+{% endfor %}
+
+# If vservers = yes in /etc/backupninja.conf then the following variables can
+# be used:
+# vsnames = all | <vserver1> <vserver2> ... (default = all)
+# vsinclude = <path>
+# Any path specified in vsinclude is added to the include list for each vserver
+# listed in vsnames (or all if vsnames = all).
+# E.g. vsinclude = /home will backup the /home partition in every vserver
+# listed in vsnames. If you have vsnames = "foo bar baz", this vsinclude will
+# add to the include list /vservers/foo/home, /vservers/bar/home and
+# /vservers/baz/home.
+# Vservers paths are derived from $VROOTDIR.
+
+# rdiff-backup specific comment, TO ADAPT
+# files to exclude from the backup
+# (supports globbing with '*')
+
+{%- for excl in exclude|default([]) %}
+exclude = {{ excl }}
+{% endfor %}
+
+######################################################
+## destination section
+## (where the files are copied to)
+
+[dest]
+
+# perform an incremental backup? (default = yes)
+# if incremental = no, perform a full backup in order to start a new backup set
+incremental = {{ 'yes' if incremental|default(True) else 'no' }}
+
+# how many days of data to keep ; default is 60 days.
+# (you can also use the time format of duplicity)
+# 'keep = yes' means : do not delete old data, the remote host will take care of this
+keep = {{ keep|default('60D') }}
+
+# bandwith limit, in kbit/s ; default is 0, i.e. no limit
+bandwidthlimit = {{ bandwidthlimit|default(0) }}
+
+# passed directly to ssh and scp
+sshoptions = {{ sshoptions|default('-i /root/.ssh/id_dsa_duplicity') }}
+
+# put the backups under this directory
+destdir = {{ destdir|default('/backups') }}
+
+# the machine which will receive the backups
+desthost = {{ desthost|default('') }}
+
+# make the files owned by this user
+# note: you must be able to ssh backupuser@backhost
+
+# without specifying a password (if type = remote).
+destuser = {{ destuser|default('') }}
