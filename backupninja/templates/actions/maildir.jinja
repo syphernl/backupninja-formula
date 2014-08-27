@@ -1,0 +1,11 @@
+# Maildir
+when = {{ when|default('') }}
+
+keepdaily = {{ keepdaily|default(3) }}
+keepweekly = {{ keepweekly|default(2) }}
+keepmonthly = {{ keepmonthly|default(1) }}
+
+srcdir = {{ srcdir|default('/var/maildir') }}
+destdir = {{ destdir|default('/backups/maildir') }}
+desthost = {{ desthost|default('') }}
+destuser = {{ destuser|default('') }}

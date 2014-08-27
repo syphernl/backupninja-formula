@@ -1,0 +1,17 @@
+## Perform backups of trac environment
+##
+## REQUIRES: apt-get install trac
+##
+## This file can be empty, the defaults are usually good.
+##
+
+when = {{ when|default('') }}
+
+## where one or more Trac environments live
+src = {{ src|default('/var/lib/trac')}}
+
+## where to save the backups to
+dest = {{ dest|default('/var/backups/trac') }}
+
+## where to save temporary backups
+tmp = {{ tmp|default('/var/backups/trac.tmp') }}

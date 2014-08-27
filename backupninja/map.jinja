@@ -1,0 +1,1 @@
+{% set backupninja = salt['grains.filter_by']({}, merge=salt['pillar.get']('backupninja:lookup')) %}

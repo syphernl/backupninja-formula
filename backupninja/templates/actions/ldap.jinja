@@ -1,0 +1,22 @@
+##
+## configuration file for openldap backups
+##
+## The LDIFs generated are suitable for use with slapadd. As the
+## entries are in database order, not superior first order, they
+## cannot be loaded with ldapadd without being reordered.
+##
+
+when = {{ when|default('') }}
+
+## backupdir (default /var/backups/ldap): the destination for the backups
+backupdir = {{ backupdir|default('/var/backups/ldap') }}
+
+## conf (default /etc/ldap/slapd.conf): the location of the slapd.conf file.
+conf = {{ conf|default('/etc/ldap/slapd.conf') }}
+
+## databases (default all): either a space separated list of database
+## numbers or prefixes, or the keyword 'all'.
+databases = {{ databases|join(" ")|default('all') }}
+
+## compress (default yes): if set to yes, ldif exports are gzipped.
+compress = {{ 'yes' if compress|default(True) else 'no' }}
