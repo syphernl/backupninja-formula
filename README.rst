@@ -14,7 +14,7 @@ There are two sections to configure:
 
 Backupninja
 -----
-The configuration for backupninja itself is fully customizable via Pillar. All settings that are available in ``/etc/backupninja.conf` can be set via Pillar.
+The configuration for backupninja itself is fully customizable via Pillar. All settings that are available in `/etc/backupninja.conf` can be set via Pillar.
 By default it follows the default settings provided by this configuration and no changes are needed for it to work, unless specific situations require you to do so.
 
 Configuration is done in the `backupninja:config` section of the pillars and is used to modify `/etc/backupninja.conf`.
