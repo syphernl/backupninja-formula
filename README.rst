@@ -91,7 +91,7 @@ Assuming you do not have any reactors yet you should add the following to ``/etc
 
    reactor:
       - 'backupninja/client/added':
-      - /srv/salt/formulas/backupninja/backupninja/master/reactors/backup_client_register.sls
+         - /srv/salt/formulas/backupninja/backupninja/master/reactors/backup_client_register.sls
 
 
 The name of the event tag can be modified in the pillar (``backupninja:register_event``)
