@@ -13,5 +13,5 @@ openssh-client:
 openssh-server:
   pkg.installed
 
-rssh:
-  pkg.installed
+#rssh:
+#  pkg.installed
