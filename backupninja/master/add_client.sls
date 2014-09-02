@@ -39,3 +39,11 @@ backup_user_{{ new_minion }}:
     - enc: ssh-rsa
     - require:
       - user: {{ ssh_username }}
+
+backup_dir_{{ new_minion }}:
+  file.directory:
+    - name: {{ backup_path }}/backups
+    - user: {{ ssh_username }}
+    - require:
+      - file: {{ backup_basepath }}
+      - user: {{ ssh_username }}
