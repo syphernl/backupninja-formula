@@ -23,7 +23,7 @@
 backup_user_{{ new_minion }}:
   user.present:
     - name: {{ ssh_username }}
-    - shell: /usr/bin/rssh
+    - shell: /bin/bash
     - home: {{ backup_path }}
     - createhome: True
   file.directory:

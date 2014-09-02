@@ -4,8 +4,8 @@
   file.directory
 
 # Configure rssh to restrict access to particular prtocols
-/etc/rssh.conf:
-  file.managed:
-    - source: salt://security/rssh.conf
-    - require:
-      - pkg: rssh
+#/etc/rssh.conf:
+#  file.managed:
+#    - source: salt://security/rssh.conf
+#    - require:
+#      - pkg: rssh
