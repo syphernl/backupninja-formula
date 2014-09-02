@@ -9,8 +9,10 @@ def run():
     for key,value in __salt__['pillar.get']('backupninja:jobs', {}).iteritems():
       action = value.get('action')
 
-      if 'rdiff' in action or 'rsync' in action:
-        packages.append( action )
+      if 'rsync' in action:
+        packages.append('rsync')
+      elif 'rdiff' in action:
+        packages.append('rdiff-backup')
       elif 'svn' in action:
         packages.append('subversion-tools')
       elif 'dup' in action:
