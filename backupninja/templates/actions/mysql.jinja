@@ -43,6 +43,9 @@ databases = {{ databases|join(" ")|default('all') }}
 # you do not want to dump the data for is called "cache".
 nodata = {{ nodata|join(" ")|default('') }}
 
+# Ignore tables to backup. See nodata for config means
+ignores = {{ ignores|join(" ")|default('') }}
+
 {%- if salt['grains.get']('os_family') == 'Debian' %}
 configfile = /etc/mysql/debian.cnf
 {% endif -%}
