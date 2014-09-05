@@ -32,7 +32,7 @@ backupdir = {{ backupdir|default('/var/backups/mysql') }}
 # databases = <all | db1 db2 db3 > (default = all)
 # which databases to backup. should either be the word 'all' or a
 # space separated list of database names.
-databases = {{ databases|join(" ")|default('all') }}
+databases = {{ databases|default('all')|join(" ") }}
 
 # only dump the structure for the database tables listed here, this means
 # no data contained in these tables will be dumped. This is very useful
