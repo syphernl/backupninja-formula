@@ -80,7 +80,7 @@ You can set this to a FQDN or a partial (e.g. ``backup*``)
 
 The use of this state is optional. If you prefer not to use it, you have to make sure a backup user exists on the destination by other means.
 
-By default a user with the "server id" (based on the FQDN) will be generated, which is also available in the grains (``salt['grans.get']('server_id')``).
+By default a user with the "server id" (based on the FQDN) will be generated, which is also available in the grains (``salt['grains.get']('server_id')``).
 This state requires the ``event`` state which is available in Salt ``2014.7`` or can be added manually to the fileserver (confirmed working at ``2014.1.7`` and up).
 
 The ``salt-master`` needs to know which event to trigger. This is configured in the master configuration.
