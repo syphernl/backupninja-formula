@@ -41,10 +41,10 @@ databases = {{ databases|join(" ")|default('all') }}
 # on a restore. You *must* specify the table as part of a database, such
 # as "drupal.cache", where the database name is "drupal" and the table that
 # you do not want to dump the data for is called "cache".
-nodata = {{ nodata|join(" ")|default('') }}
+nodata = {{ nodata|default('')|join(" ") }}
 
 # Ignore tables to backup. See nodata for config means
-ignores = {{ ignores|join(" ")|default('') }}
+ignores = {{ ignores|default('')|join(" ") }}
 
 {%- if salt['grains.get']('os_family') == 'Debian' %}
 configfile = /etc/mysql/debian.cnf
