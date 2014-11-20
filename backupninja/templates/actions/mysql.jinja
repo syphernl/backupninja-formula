@@ -32,7 +32,19 @@ backupdir = {{ backupdir|default('/var/backups/mysql') }}
 # databases = <all | db1 db2 db3 > (default = all)
 # which databases to backup. should either be the word 'all' or a
 # space separated list of database names.
-databases = {{ databases|join(" ")|default('all') }}
+databases = {{ databases|default('all')|join(" ") }}
+
+# only dump the structure for the database tables listed here, this means
+# no data contained in these tables will be dumped. This is very useful
+# to backup databases that have tables with large amounts of cache data that
+# isn't necessary to backup, but you still need the structure to exist
+# on a restore. You *must* specify the table as part of a database, such
+# as "drupal.cache", where the database name is "drupal" and the table that
+# you do not want to dump the data for is called "cache".
+nodata = {{ nodata|default('')|join(" ") }}
+
+# Ignore tables to backup. See nodata for config means
+ignores = {{ ignores|default('')|join(" ") }}
 
 {%- if salt['grains.get']('os_family') == 'Debian' %}
 configfile = /etc/mysql/debian.cnf
