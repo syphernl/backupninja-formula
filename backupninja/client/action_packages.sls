@@ -15,7 +15,7 @@ def run():
         packages.append('rdiff-backup')
       elif 'svn' in action:
         packages.append('subversion-tools')
-      elif 'dup' in action:
+      elif 'dup' in action or 's3' in action:
         packages.append('duplicity')
 
     for package in packages:

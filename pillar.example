@@ -15,6 +15,23 @@ backupninja:
           - mysql
           - projectx
           - projecty
+    backup_amazon:
+      backup_to_s3:
+        action: dup
+        priority: '20'
+        config:
+          when: 'everyday at 03'
+          password: 'foobar'
+          options: '--s3-european-buckets --s3-use-new-style --no-compression --no-encryption --verbosity 8'
+          dest_url: 's3+http://bucket-name-here'
+          aws_accesskey: 'my-access-key'
+          aws_secretkey: 'my-secret-key'
+          keep: 'yes' # do not remove files
+          sign: False
+          destdir: ''
+          sshoptions: ''
+          include:
+            - /data/images
     backup_etc:
       action: rdiff
       priority: 80

@@ -81,6 +81,28 @@ exclude = {{ excl }}
 
 [dest]
 
+## full destination URL, in duplicity format; if set, desturl overrides
+## sshoptions, destdir, desthost and destuser; it also disables testconnect and
+## bandwithlimit. For details, see duplicity manpage, section "URL FORMAT", some
+## examples include:
+## desturl = file:///usr/local/backup
+## desturl = rsync://user@other.host//var/backup/bla
+## desturl = s3+http://
+## desturl = ftp://myftpuser@ftp.example.org/remote/ftp/path
+## the default value of this configuration option is not set:
+##
+## Default:
+desturl = {{ dest_url|default('') }}
+
+## Amazon Web Services Access Key ID and Secret Access Key, needed for backups
+## to S3 buckets.
+## awsaccesskeyid = YOUR_AWS_ACCESS_KEY_ID
+## awssecretaccesskey = YOUR_AWS_SECRET_KEY
+##
+## Default:
+awsaccesskeyid = {{ aws_accesskey|default('') }}
+awssecretaccesskey = {{ aws_secretkey|default('') }}
+
 # perform an incremental backup? (default = yes)
 # if incremental = no, perform a full backup in order to start a new backup set
 incremental = {{ 'yes' if incremental|default(True) else 'no' }}
