@@ -15,9 +15,21 @@
 {% set backup_path = backup_basepath + '/' + new_minion %}
 
 # Basedir should exist
-{{ backup_basepath }}:
+/srv/backups:
   file.directory:
     - makedirs: True
+
+/srv/backups/{{ bu_pathname_a }}:
+  file.directory:
+    - mode: '111'
+    - require:
+      - file: /srv/backups
+
+{{ backup_basepath }}:
+  file.directory:
+    - require:
+      - mode: '111'
+      - file: /srv/backups/{{ bu_pathname_a }}
 
 # Create backup structure for user
 backup_user_{{ new_minion }}:
