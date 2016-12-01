@@ -27,8 +27,8 @@
 
 {{ backup_basepath }}:
   file.directory:
+    - mode: '111'
     - require:
-      - mode: '111'
       - file: /srv/backups/{{ bu_pathname_a }}
 
 # Create backup structure for user
@@ -38,12 +38,13 @@ backup_user_{{ new_minion }}:
     - shell: /bin/bash
     - home: {{ backup_path }}
     - createhome: True
+    - require:
+      - file: {{ backup_basepath }}
   file.directory:
     - name: {{ backup_path }}
     - makedirs: True
     - user: {{ ssh_username }}
     - require:
-      - file: {{ backup_basepath }}
       - user: {{ ssh_username }}
   ssh_auth.present:
     - name: {{ new_pubkey }}
