@@ -2,7 +2,7 @@ when = {{ when|default('') }}
 
 options = {{ options|default('') }}
 testconnect = {{ 'yes' if testconnect|default(True) else 'no' }}
-ignore_version = {{ 'no' if ignore_version|default(False) else 'yes' }}
+ignore_version = {{ 'yes' if ignore_version|default(False) else 'no' }}
 bwlimit = {{ bwlimit|default('0') }}
 
 [source]
