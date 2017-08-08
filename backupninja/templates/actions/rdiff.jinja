@@ -1,5 +1,9 @@
-# options = --force
 when = {{ when|default('') }}
+
+options = {{ options|default('') }}
+testconnect = {{ 'yes' if testconnect|default(True) else 'no' }}
+ignore_version = {{ 'no' if ignore_version|default(False) else 'yes' }}
+bwlimit = {{ bwlimit|default('0') }}
 
 [source]
 type = {{ type|default('local') }}

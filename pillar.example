@@ -38,6 +38,10 @@ backupninja:
       config:
         type: local
         keep: 30
+        options = '--force'
+        testconnect = True
+        ignore_version = False
+        bwlimit = 0
         include:
           - /etc
         exclude:
