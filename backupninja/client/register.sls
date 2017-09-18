@@ -4,7 +4,7 @@ register_backup_client:
   event.fire_master:
     - name: {{ salt['pillar.get']('backupninja:register_event', 'backupninja/client/register') }}
     - data:
-        ssh_pubkey: {{ salt['cmd.run']('test -f /root/.ssh/id_rsa.pub || ssh-keygen -q -N "" -f /root/.ssh/id_rsa && cat /root/.ssh/id_rsa.pub') }}
+        ssh_pubkey: {{ salt['cmd.run']('/bin/sh -c "test -f /root/.ssh/id_rsa.pub || ssh-keygen -q -N \\"\\" -f /root/.ssh/id_rsa && cat /root/.ssh/id_rsa.pub"') }}
         server_id: {{ salt['grains.get']('server_id') }}
         backup_server: {{ salt['pillar.get']('backupninja:server', 'backup*') }}
 
