@@ -6,7 +6,7 @@ def run():
     config = {}
 
     packages = []
-    for key,value in __salt__['pillar.get']('backupninja:jobs', {}).iteritems():
+    for key,value in __salt__['pillar.get']('backupninja:jobs', {}).items():
       action = value.get('action')
 
       if 'rsync' in action:

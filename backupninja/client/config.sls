@@ -12,7 +12,7 @@
     - mode: 0600
 
 # Generate the job files
-{% for backup_name, backup_options in salt['pillar.get']('backupninja:jobs', {}).iteritems() %}
+{% for backup_name, backup_options in salt['pillar.get']('backupninja:jobs', {}).items() %}
 {% set backup_type = backup_options.get('action') %}
 {% set backup_priority = backup_options.get('priority', 10) %}
 {% set backup_settings = backup_options.get('config', []) %}
